@@ -1,43 +1,36 @@
 ---
-version: "2.4"
-
-volumes:
-  data:
-
-networks:
-   syncthing:
-
+version: '3'
 services:
   syncthing:
-    image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
-    # hostname: syncthing
-    networks:
-      - syncthing
-    # cpu_count: 1
-    # cpus: 0.6
-    # cpu_percent: 30
-    # mem_limit: 500m
+    image: lscr.io/linuxserver/syncthing:latest
     environment:
       PUID: 1000
       PGID: 1000
+      SET_CONTAINER_TIMEZONE: 'true'
+      CONTAINER_TIMEZONE: America/Santiago
       TZ: America/Santiago
       # Limit CPU Usage
       GOMAXPROCS: 1
     volumes:
       - ./config:/config
       - ./data:/data
-    ports:
-      - 8384:8384
-      - 22000:22000/tcp
-      - 22000:22000/udp
-      - 21027:21027/udp
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
+    network_mode: host
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     healthcheck:
       test: curl --fail -s http://localhost:8384/ || exit 1
       interval: 1m30s
       timeout: 10s
       retries: 3
+  # ports:
+  #   - 8384:8384
+  #   - 22000:22000/tcp
+  #   - 22000:22000/udp
+  #   - 21027:21027/udp
   # proxy:
   #   image: nginx:stable-alpine
   #   networks:
@@ -53,3 +46,10 @@ services:
   #     interval: 1m30s
   #     timeout: 10s
   #     retries: 3
+
+# volumes:
+#   data:
+
+
+# networks:
+#    syncthing:
