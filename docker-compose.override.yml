@@ -1,0 +1,5 @@
+
+services:
+  syncthing:
+    volumes:
+      - ./ANY_YOU_NEED:/ANY_YOU_NEED
