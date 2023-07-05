@@ -1,5 +1,11 @@
 
 services:
   syncthing:
+    container_name: syncthing-NAME
     volumes:
       - ./ANY_YOU_NEED:/ANY_YOU_NEED
+    ports:
+      - KEEP_OR_REPLACE_EXT_PORT:8384
+      - KEEP_OR_REPLACE_EXT_PORT:22000/tcp
+      - KEEP_OR_REPLACE_EXT_PORT:22000/udp
+      - KEEP_OR_REPLACE_EXT_PORT:21027/udp

@@ -16,7 +16,7 @@ Using Docker package to config Syncthing client
 
 ## Start
 
-- Edit "docker-compose.override" to add new/own sources
-``docker-compose --compatibility up -d``
+- Edit and customize "docker-compose.override.yaml"
+- Execute: ``docker-compose --compatibility up -d``
 
 Based on <https://github.com/linuxserver/docker-syncthing/pkgs/container/syncthing>
